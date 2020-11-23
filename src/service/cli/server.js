@@ -10,7 +10,6 @@ const FILENAME = "mocks.json";
 
 const onClientConnect = async (req, res) => {
   const notFoundMessageText = `Not found`;
-  console.log(req.url);
   switch (req.url) {
     case `/`:
       try {
