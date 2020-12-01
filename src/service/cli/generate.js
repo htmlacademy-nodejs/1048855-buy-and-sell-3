@@ -6,9 +6,9 @@ const chalk = require("chalk");
 
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
-const FILE_SENTENCES_PATH = `./data/sentences.txt`;
-const FILE_TITLES_PATH = `./data/titles.txt`;
-const FILE_CATEGORIES_PATH = `./data/categories.txt`;
+const FILE_SENTENCES_PATH = path.resolve(`data/sentences.txt`);
+const FILE_TITLES_PATH = path.resolve(`data/titles.txt`);
+const FILE_CATEGORIES_PATH = path.resolve(`data/categories.txt`);
 
 const OfferType = {
   OFFER: `offer`,
@@ -39,8 +39,7 @@ const getPictureFileName = (number) => {
   return `item${number < 10 ? `0${number}` : number}.jpg`;
 };
 
-const getCategories = (CATEGORIES, count) => {
-  const categories = CATEGORIES.slice();
+const getCategories = (categories, count) => {
   const result = [];
   for (let i = 0; i < count; i++) {
     const index = getRandomInt(0, categories.length - 1);
