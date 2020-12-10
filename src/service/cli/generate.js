@@ -3,12 +3,13 @@
 const { getRandomInt, shuffle } = require(`../../utils`);
 const fs = require(`fs`).promises;
 const chalk = require("chalk");
+const path = require("path");
 
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
-const FILE_SENTENCES_PATH = `./data/sentences.txt`;
-const FILE_TITLES_PATH = `./data/titles.txt`;
-const FILE_CATEGORIES_PATH = `./data/categories.txt`;
+const fileSentencesPath = path.resolve(`data/sentences.txt`);
+const fileTitlesPath = path.resolve(`data/titles.txt`);
+const fileCategoriesPath = path.resolve(`data/categories.txt`);
 
 const OfferType = {
   OFFER: `offer`,
@@ -39,8 +40,7 @@ const getPictureFileName = (number) => {
   return `item${number < 10 ? `0${number}` : number}.jpg`;
 };
 
-const getCategories = (CATEGORIES, count) => {
-  const categories = CATEGORIES.slice();
+const getCategories = (categories, count) => {
   const result = [];
   for (let i = 0; i < count; i++) {
     const index = getRandomInt(0, categories.length - 1);
@@ -73,9 +73,9 @@ module.exports = {
   name: `--generate`,
   async run(args) {
     try {
-      const sentences = await readFile(FILE_SENTENCES_PATH);
-      const titles = await readFile(FILE_TITLES_PATH);
-      const categories = await readFile(FILE_CATEGORIES_PATH);
+      const sentences = await readFile(fileSentencesPath);
+      const titles = await readFile(fileTitlesPath);
+      const categories = await readFile(fileCategoriesPath);
       const [count] = args;
       const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
       if (countOffer > 1000) {
