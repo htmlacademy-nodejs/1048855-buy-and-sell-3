@@ -1,12 +1,12 @@
 "use strict";
 
 const http = require(`http`);
-const { HttpCode } = require("../../constants");
-const logger = require("../../logger");
+const {HttpCode} = require(`../../constants`);
+const logger = require(`../../logger`);
 const fs = require(`fs`).promises;
 
 const DEFAULT_PORT = 3000;
-const FILENAME = "mocks.json";
+const FILENAME = `mocks.json`;
 
 const onClientConnect = async (req, res) => {
   const notFoundMessageText = `Not found`;
@@ -23,7 +23,8 @@ const onClientConnect = async (req, res) => {
 
       break;
     case `/hello`:
-      sendResponse(res, HttpCode.OK, 'Привет');
+      sendResponse(res, HttpCode.OK, `Привет`);
+      break;
     default:
       sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
       break;

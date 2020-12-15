@@ -1,9 +1,9 @@
 "use strict";
 
-const { getRandomInt, shuffle } = require(`../../utils`);
+const {getRandomInt, shuffle} = require(`../../utils`);
 const fs = require(`fs`).promises;
-const path = require("path");
-const logger = require("../../logger");
+const path = require(`path`);
+const logger = require(`../../logger`);
 
 const DEFAULT_COUNT = 1;
 const MAX_OFFERS_COUNT = 1000;
@@ -58,7 +58,7 @@ const generateOffers = (count, sentences, titles, categories) =>
       category: getCategories(categories, getRandomInt(1, categories.length)),
       description: shuffle(sentences).slice(1, 5).join(` `),
       picture: getPictureFileName(
-        getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)
+          getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)
       ),
       title: titles[getRandomInt(0, titles.length - 1)],
       type:
@@ -84,16 +84,16 @@ module.exports = {
         process.exit(1);
       }
       const content = JSON.stringify(
-        generateOffers(countOffer, sentences, titles, categories)
+          generateOffers(countOffer, sentences, titles, categories)
       );
       try {
         await fs.writeFile(FILE_NAME, content);
         logger.success(`Operation success. File created.`);
-      } catch {
-        logger.error(`Can't write data to file...`);
+      } catch (error) {
+        logger.error(`Can't write data to file...`, error);
       }
-    } catch {
-      logger.error(`Can't generate data...`);
+    } catch (error) {
+      logger.error(`Can't generate data...`, error);
       process.exit(1);
     }
   },

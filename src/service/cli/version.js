@@ -1,6 +1,6 @@
 "use strict";
 const packageJsonFile = require(`../../../package.json`);
-const logger = require("../../logger");
+const logger = require(`../../logger`);
 
 module.exports = {
   name: `--version`,
