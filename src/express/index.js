@@ -3,9 +3,9 @@
 const express = require(`express`);
 const path = require(`path`);
 
-const offersRoutes = require(`./routes/offers-routes`);
-const myRoutes = require(`./routes/my-routes`);
-const mainRoutes = require(`./routes/main-routes`);
+const offersRoutes = require(`./routes/offers`);
+const myRoutes = require(`./routes/my`);
+const mainRoutes = require(`./routes/main`);
 const logger = require(`../logger`);
 
 const DEFAULT_PORT = 8080;
@@ -19,6 +19,10 @@ app.use(`/offers`, offersRoutes);
 app.use(`/my`, myRoutes);
 app.use(`/`, mainRoutes);
 
-app.listen(DEFAULT_PORT);
-
-logger.success(`Приложение запущено на http://localhost:${DEFAULT_PORT}`);
+app
+  .listen(DEFAULT_PORT, () => {
+    logger.success(`Приложение запущено на http://localhost:${DEFAULT_PORT}`);
+  })
+  .on(`error`, (err) => {
+    logger.error(`Не удалось запустить приложение. Ошибка: ${err}`);
+  });
