@@ -18,7 +18,8 @@ app.get(`/offers`, async (req, res) => {
     const mocks = JSON.parse(fileContent);
     res.json(mocks);
   } catch (err) {
-    res.status(HttpCode.INTERNAL_SERVER_ERROR).send(err);
+    logger.error(`Ошибка работы с файлом предложений. ${err}`);
+    res.json([]);
   }
 });
 
